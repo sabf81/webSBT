@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Web SessionCreator for SBT</title>
+<script src="Scripts/Testers.js"></script>
+<script src="Scripts/Charter.js"></script>
+<link rel="stylesheet" href="Style/main.css">
+</head>
+
+  <body>
+  <nav id ="mainNav">
+    <a href="">Session</a>
+    <a href="">Reports</a>
+    <a href="">Configure</a>
+  </nav>
+<h1>Welcome to the Web SessionCreator for Session Based Testing</h1>
+<script>
+	window.addEventListener('load', getTesters);
+  window.addEventListener('load', getCharters);
+  window.addEventListener('load', getSizeOfCharter)
+</script>
+<form>
+  <div id="testerSection">
+    <label for="TesterDropdown">Please choose your name:</label>
+    <select id="TesterDropdown" required>
+      <option value="">None</option>
+    </select>
+  </div>
+  <div id="Charter">
+    <label id="CharterHeader" for="CharterDropdown">Please select one of Charter:</label>
+    <select id="CharterDropdown" size="3">
+      <option value="">None</option>
+    </select>
+  </div>
+  <div id="NewCharter">
+    <label for="inputNewCharter">OR Create a new Charter</label>
+    <input type="text" name="inputNewCharter" />
+  </div>
+</form>
+</body>
+</html>
