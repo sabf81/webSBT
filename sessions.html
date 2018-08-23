@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="Scripts/navigation.js"></script>
+<script src="Scripts/Testers.js"></script>
+<script src="Scripts/Charter.js"></script>
+<link rel="stylesheet" href="Style/main.css">
+<link rel="stylesheet" href="Style/navigation.css">
+</head>
+  <body>
+    <div id="nav-placeholder"></div>
+  <h1>Sessions</h1>
+  <script>
+  	window.addEventListener('load', getTesters);
+    window.addEventListener('load', getCharters);
+    window.addEventListener('load', getSizeOfCharter)
+  </script>
+<script>
+$(function(){
+  $("#nav-placeholder").load("navigation.html");
+});
+</script>
+  <form>
+    <div id="testerSection">
+      <label for="TesterDropdown">Please choose your name:</label>
+      <select id="TesterDropdown" required>
+        <option value="">None</option>
+      </select>
+    </div>
+    <div id="Charter">
+      <label id="CharterHeader" for="CharterDropdown">Please select one of Charter:</label>
+      <select id="CharterDropdown" size="3">
+        <option value="">None</option>
+      </select>
+    </div>
+    <div id="NewCharter">
+      <label for="inputNewCharter">OR Create a new Charter</label>
+      <input type="text" name="inputNewCharter" />
+    </div>
+  </form>
+</body>
+</html>
