@@ -22,9 +22,11 @@
 }
 
 /* Add an active class to highlight the current page */
-.active {
+.topnav a:active {
    background-color: #4FB7C9;
    color: white;
+   text-decoration: underline;
+
 }
 
 /* Hide the link that should open and close the topnav on small screens */

@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="Scripts/navigation.js"></script>
-<link rel="stylesheet" href="Style/main.css">
-</head>
-  <body>
-  <div id="nav-placeholder"></div>
-  <script>
-  $(function(){
-    $("#nav-placeholder").load("navigation.html");
-  });
-  </script>
- <div id="content"> <h1>Configure</h1>
- <p>Here you can configura all necassary data you need for the Session Based Testing</p>
- <form>
-  <div id="NewTester">
-      <label for="inputNewTester">Add Tester</label>
-      <input type="text" name="inputNewTester" />
-	  <input type="button" value="Add Tester">
-	  <input type="button" value="Remove Tester">
-    </div>
- </form>
- <form>
-  <div id="NewArea">
-      <label for="inputNewArea">Add Area</label>
-      <input type="text" name="inputNewArea" />
-	  <input type="button" value="Add Area">
-	  <input type="button" value="Remove Area">
-    </div>
- </form>
- </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="Scripts/navigation.js"></script>
+        <link rel="stylesheet" href="Style/main.css">
+        <link rel="stylesheet" href="Style/sidenavigation.css">
+    </head>
+    <body>
+        <div id="nav-placeholder"></div>
+        <script>
+            $(function () {
+                $("#nav-placeholder").load("navigation.html");
+            });
+        </script>
+        <div id="content">
+            <h1>Configure</h1>
+            <p>Here you can configura all necassary data you need for the Session Based Testing</p>
+            <div id="sidebar" class="sidebar">
+                <a href="#nav-placeholder" title="Top"><img src="images/TopArrow.gif" alt="Top" /></a>
+                <a href="#NewCharter" title="go to Charter"><img src="images/Charter.gif" alt="Charter" /></a>
+                <a href="#NewArea" title="go to Areas"><img src="images/Areas.gif" alt="Areas" /></a>
+                <a href="#NewTester" title="go to Tester"><img src="images/Tester.gif" alt="Tester" /></a>
+            </div>
+            <form>
+                <div id="NewCharter">
+                    <label for="inputNewCharter">Add Charter</label>
+                    <input type="text" name="inputNewCharter" />
+                    <input type="button" value="Add Charter">
+                    <input type="button" value="Remove Charter">
+                </div>
+            </form>
+            <form>
+                <div id="NewArea">
+                    <label for="inputNewArea">Add Area</label>
+                    <input type="text" name="inputNewArea" />
+                    <input type="button" value="Add Area">
+                    <input type="button" value="Remove Area">
+                </div>
+            </form>
+            <form>
+                <div id="NewTester">
+                    <label for="inputNewTester">Add Tester</label>
+                    <input type="text" name="inputNewTester" />
+                    <input type="button" value="Add Tester">
+                    <input type="button" value="Remove Tester">
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
