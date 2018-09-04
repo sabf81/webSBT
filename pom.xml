@@ -72,6 +72,13 @@
       <artifactId>jersey-core</artifactId>
       <version>1.19.4</version>
     </dependency>
+    <!-- jsondb -->
+    <dependency>
+    <groupId>io.jsondb</groupId>
+    <artifactId>jsondb-core</artifactId>
+    <version>1.0.36</version>
+  </dependency>
+
   </dependencies>
   <build>
     <finalName>webappSBT</finalName>
