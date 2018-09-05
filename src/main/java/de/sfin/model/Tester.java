@@ -2,10 +2,13 @@ package de.sfin.model;
 
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 
-@Document(collection = "tester", schemaVersion= "1.0")
+@Document(collection = "Tester", schemaVersion= "1.0")
+@XmlRootElement
 public class Tester {
 
   @Id
@@ -18,13 +21,9 @@ public class Tester {
   /**
   * Default Tester constructor
   */
-  public Tester (String firstname, String lastname, String email) {
-    this.id = UUID.randomUUID().toString();
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-  }
+  public Tester () {
 
+  }
 
 	/**
 	* Returns value of id
@@ -38,8 +37,8 @@ public class Tester {
 	* Sets new value of id
 	* @param
 	*/
-	public void setId() {
-		this.id = UUID.randomUUID().toString();
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**
@@ -90,4 +89,12 @@ public class Tester {
 		this.email = email;
 	}
 
+	/**
+	* Create string representation of Tester for printing
+	* @return
+	*/
+	@Override
+	public String toString() {
+		return "Tester [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + "]";
+	}
 }
