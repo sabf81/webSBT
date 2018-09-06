@@ -2,6 +2,7 @@ package de.sfin.services;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.FormParam;
@@ -39,12 +40,10 @@ public class TesterService {
   }
 
   @POST
-  // @Path("/add/{firstname}/{lastname}/{email}")
   @Path("/add")
-  // public Response addTester(@PathParam("firstname") String firstname,@PathParam("lastname") String lastname, @PathParam("email") String email){
-    public Response addTester(@FormParam("inputFirstNameOfTester") String firstname,
-    @FormParam("inputLastNameOfTester") String lastname,
-    @FormParam("inputTesterEmail") String email, @Context HttpServletResponse servletResponse) throws IOException{
+  public Response addTester(@FormParam("inputFirstNameOfTester") String firstname,
+  @FormParam("inputLastNameOfTester") String lastname,
+  @FormParam("inputTesterEmail") String email, @Context HttpServletResponse servletResponse) throws IOException{
     JsonDBConnector jsondbConn = new JsonDBConnector();
     JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
     String output = "";
@@ -68,9 +67,28 @@ public class TesterService {
       jsonDbTemplate.upsert(tester);
       output = "upsert Tester: "+tester.toString();
     }
-    servletResponse.sendRedirect("/configure.html");
+    servletResponse.sendRedirect("/configure.html#NewTester");
     return Response.status(200).entity(output).build();
   }
+
+  @DELETE
+  @Path("/remove/{ids}")
+  public Response removeTester(@PathParam("ids") String ids) {
+    JsonDBConnector jsondbConn = new JsonDBConnector();
+    JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
+    String output = "";
+    String[] testerIds = ids.split(",");
+    for(String id : testerIds){
+      Tester tester = new Tester();
+      tester.setId(id);
+      jsonDbTemplate.remove(tester,Tester.class);
+      output.concat("Tester with id "+id+" was removed. ");
+    }
+
+    return Response.status(200).entity(output).build();
+  }
+
+
 
 
 }

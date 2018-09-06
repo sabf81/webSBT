@@ -56,19 +56,46 @@ input, label, select {
 }
 
 .col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+}
+
+.col-25r {
+  float: right;
+  width: 35%;
+  margin-top: 6px;
 }
 
 .col-75 {
-    float: left;
-    width: 75%;
-    margin-top: 6px;
+  float: left;
+  width: 85%;
+  margin-top: 6px;
 }
 
 .row:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
+}
+
+table th, tr {
+  border: 1px solid #dddddd;
+  background: #eddcdc;
+  padding: 5px;
+}
+
+table tbody th, tr {
+  border: 1px solid #003;
+}
+
+table tbody tr {
+  border: 1px solid #003;
+  background: #FAFAFA;
+}
+table tbody tr:hover {
+    background: #fce5eb;
+}
+table tbody tr.alt:hover {
+    background: #fce5eb;
 }
