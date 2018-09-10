@@ -1,7 +1,5 @@
 package de.sfin.model;
 
-import java.util.UUID;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import io.jsondb.annotation.Document;

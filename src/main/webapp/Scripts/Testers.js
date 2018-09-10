@@ -57,13 +57,22 @@ function getAllTesterWithEmail(){
     }
   })
   .catch(function(error) {
-  console.log('There has been a problem with your fetch operation: ', error.message);
+	  console.log('There has been a problem with your fetch operation: ', error.message);
   });
 }
 
 function removeTester(){
   var Ids = getIdsToRemoveTester();
   deleteData(Ids,'rest/tester/remove')
+  var allRows = document.getElementById('TesterTabeleBody').getElementsByTagName('tr');
+  var root = allRows[0].parentNode;
+  var allInp = root.getElementsByTagName('input');
+  for(var i=allInp.length-1;i>=0;i--){
+  	if((allInp[i].getAttribute('type')=='checkbox')&&(allInp[i].checked)){
+  		root.removeChild(allInp[i].parentNode.parentNode)
+  	}
+  }
+  
 }
 
 function getIdsToRemoveTester(){
