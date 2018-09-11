@@ -64,6 +64,11 @@ function getAllTesterWithEmail(){
 function removeTester(){
   var Ids = getIdsToRemoveTester();
   deleteData(Ids,'rest/tester/remove')
+  deleteTableRow();
+
+}
+
+function deleteTableRow(){
   var allRows = document.getElementById('TesterTabeleBody').getElementsByTagName('tr');
   var root = allRows[0].parentNode;
   var allInp = root.getElementsByTagName('input');
@@ -72,7 +77,6 @@ function removeTester(){
   		root.removeChild(allInp[i].parentNode.parentNode)
   	}
   }
-  
 }
 
 function getIdsToRemoveTester(){
