@@ -18,21 +18,10 @@ public class Charter {
   private String Chartername;
   private Status Status;
 
-  /**
-	* Returns value of Status
-	* @return
-	*/
-	public enum getStatus() {
-		return Status;
-	}
-
-	/**
-	* Sets new value of Status
-	* @param
-	*/
-	public void setStatus(enum Status) {
-		this.Status = Status;
-	}
+  
+  public Charter() {
+	  
+  }
 
 	/**
 	* Returns value of id
@@ -89,6 +78,6 @@ public class Charter {
 	*/
 	@Override
 	public String toString() {
-		return "Charter [Status=" + Status + ", id=" + id + ", Chartername=" + Chartername + ", Status=" + Status + "]";
+		return "Charter [Status=" + Status + ", id=" + id + ", Chartername=" + Chartername + "]";
 	}
 }

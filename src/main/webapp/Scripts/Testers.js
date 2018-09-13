@@ -1,6 +1,6 @@
 var testerDropdown
 
-function getTesters(){
+function loadTesterDropdown(){
   fetch('/rest/tester/all')
   .then(function(response) {
     if(response.ok){
@@ -30,7 +30,7 @@ function getTesters(){
   });
 }
 
-function getAllTesterWithEmail(){
+function loadTesterTableRow(){
   fetch('/rest/tester/all')
   .then(function(response) {
     if(response.ok){
