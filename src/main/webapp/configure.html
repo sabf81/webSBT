@@ -35,21 +35,29 @@
 		<form>
 			<div id="NewCharter">
 				<h2>Charter</h2>
+				<fieldset>
+					<legend>Charter Information</legend>
 				<label for="inputNewCharter">Add Charter</label>
 				<textarea id="inputNewCharter"></textarea>
 				<input type="button" value="Add Charter" onClick="addNewCharter()">
-				<table id="CharterTable">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Chartername</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody id="CharterTableBody">
-					</tbody>
-				</table>
-				<input type="button" value="Remove Charter">
+				</fieldset>					
+				</div>
+				<fieldset>
+					<legend>Charter Overview</legend>
+					<div>
+						<table id="CharterTable">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Chartername</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody id="CharterTableBody">
+							</tbody>
+						</table>
+				<input type="button" value="Remove Charter" onClick="removeCharter()">
+			</fieldset>
 			</div>
 		</form>
 		<form>

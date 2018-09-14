@@ -36,11 +36,50 @@ function addNewCharter(){
 		})
 		.then(response => response.text())
 		.catch(error => console.error('Error:', error))
-		.then(function(response) { 
+		.then(function(response) {
 			console.log('Success:', response)
 			loadCharterWithStatusInTableRow('TODO')
 		});
-	
+}
+
+function removeCharter(){
+  var Ids = getIdsToRemoveCharter();
+  deleteData(Ids, 'rester/charter/remove');
+  deleteTableRow();
+}
+
+function getIdsToRemoveCharter(){
+  var selected = [];
+  $("table td :checkbox").each(function() {
+    if($(this).is(':checked')){
+      selected.push(this.id);
+      console.log(this.id);
+    }
+
+  });
+  return selected;
+}
+
+function deleteData(item, url) {
+  return fetch(url + '/' + item, {
+    method: 'delete'
+  })
+  .then(function(response) {
+    return response.text();
+  }).then(function(text) {
+  	console.log(text);
+  });
+};
+
+function deleteTableRow(){
+  var allRows = document.getElementById('CharterTableBody').getElementsByTagName('tr');
+  var root = allRows[0].parentNode;
+  var allInp = root.getElementsByTagName('input');
+  for(var i=allInp.length-1;i>=0;i--){
+  	if((allInp[i].getAttribute('type')=='checkbox')&&(allInp[i].checked)){
+  		root.removeChild(allInp[i].parentNode.parentNode)
+  	}
+  }
 }
 
 function loadCharterWithStatusInTableRow(status){
@@ -53,6 +92,7 @@ function loadCharterWithStatusInTableRow(status){
 	  })
 	  .then(function(myJson) {
 	    var table = document.getElementById("CharterTableBody");
+      while (table.firstChild) table.removeChild(table.firstChild);
 	    for(i in myJson){
 	      var row = table.insertRow(0);
 	      var idCell = row.insertCell(0)
@@ -63,8 +103,8 @@ function loadCharterWithStatusInTableRow(status){
 	      chkbox.id = myJson[i]['id'] ;
 	      chkbox.name = myJson[i]['id'] ;
 	      idCell.appendChild(chkbox);
-	      charterName.innerHTML = myJson[i]['Chartername'];
-	      charterStatus.innerHTML = myJson[i]['Status'];
+	      charterName.innerHTML = myJson[i]['chartername'];
+	      charterStatus.innerHTML = myJson[i]['status'];
 	    }
 	  })
 	  .catch(function(error) {

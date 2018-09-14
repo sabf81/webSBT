@@ -21,29 +21,15 @@ public class CharterRepository {
 		Charter.Status charterStatus = Charter.Status.valueOf(status);
 		JsonDBConnector jsondbConn = new JsonDBConnector();
 		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
-		List<Charter> charterList = jsonDbTemplate.findAll(Charter.class);
-
+		String jxQuery = String.format("/.[status='%s']", charterStatus);
+		List<Charter> charterList = jsonDbTemplate.find(jxQuery,Charter.class);
+		LOG.info("entries: "+charterList.size());
 		if (charterList.isEmpty()) {
 			LOG.warning("No Charter found in 'JsonDB'");
 			return null;
 		}
 
-		ArrayList<Charter> charterWithStatus = new ArrayList<Charter>();
-		
-		LOG.info("entries: "+charterList.size());
-
-		Iterator<Charter> iterator = charterList.iterator();
-		while (iterator.hasNext()) {
-			if(iterator.next().getStatus().equals(charterStatus)) {
-				charterWithStatus.add(iterator.next());
-			}
-		}
-//		for (Charter ch : charterList) {
-//			if (ch.getStatus().equals(status)) {
-//				charterWithStatus.add(ch);
-//			}
-//		}
-		return charterWithStatus;
+		return charterList;
 	}
 
 	public ResponseDTO addNewCharter(String charterName) {
@@ -56,7 +42,7 @@ public class CharterRepository {
 		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
 		Boolean collectionExists = jsonDbTemplate.collectionExists(Charter.class);
 		int countOfEntries = jsonDbTemplate.getCollection(Charter.class).size();
-		
+
 		Charter charter = new Charter();
 		charter.setChartername(charterName);
 		charter.setStatus(Charter.Status.TODO);
@@ -68,15 +54,30 @@ public class CharterRepository {
 			String insertOk = "insert Charter: " + charter.toString();
 			LOG.info(insertOk);
 			return new ResponseDTO(200,insertOk);
-			
+
 		}else {
 			jsonDbTemplate.upsert(charter);
 			String upsertOk = "upsert Charter: " + charter.toString();
 			LOG.info(upsertOk);
 			return new ResponseDTO(200,upsertOk);
-			
+
 		}
 
+	}
+
+	public ResponseDTO removeCharter(String ids){
+		JsonDBConnector jsondbConn = new JsonDBConnector();
+		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
+		String output = "";
+		String[] charterIds = ids.split(",");
+		for (String id : charterIds) {
+			Charter charter = new Charter();
+			charter.setId(id);
+			jsonDbTemplate.remove(charter, Charter.class);
+			LOG.info("Charter with id " + id + " was removed.");
+			output.concat("Charter with id " + id + " was removed. ");
+		}
+		return new ResponseDTO(200,output);
 	}
 
 }

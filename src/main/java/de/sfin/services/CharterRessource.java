@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -32,7 +33,13 @@ public class CharterRessource {
 	public Response addNewCharter(@FormParam("charterName") String charterName) {
 		ResponseDTO response = charterRepo.addNewCharter(charterName);
 		return Response.status(response.getReturnCode()).entity(response.getMessageText()).build();
-		
+	}
+
+	@DELETE
+	@Path("/remove/{ids}")
+	public Response removeCharter(@PathParam("ids") String ids) {
+		ResponseDTO response = charterRepo.removeCharter(ids);
+		return Response.status(response.getReturnCode()).entity(response.getMessageText()).build();
 	}
 
 }
