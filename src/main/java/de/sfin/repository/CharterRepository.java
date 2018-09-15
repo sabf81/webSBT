@@ -1,7 +1,5 @@
 package de.sfin.repository;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -23,7 +21,7 @@ public class CharterRepository {
 		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
 		String jxQuery = String.format("/.[status='%s']", charterStatus);
 		List<Charter> charterList = jsonDbTemplate.find(jxQuery,Charter.class);
-		LOG.info("entries: "+charterList.size());
+		LOG.fine("entries: "+charterList.size());
 		if (charterList.isEmpty()) {
 			LOG.warning("No Charter found in 'JsonDB'");
 			return null;
@@ -47,22 +45,18 @@ public class CharterRepository {
 		charter.setChartername(charterName);
 		charter.setStatus(Charter.Status.TODO);
 		Random random = new Random();
-		String output = "";
 		charter.setId(String.valueOf(countOfEntries + random.nextInt(1000)));
 		if(!collectionExists) {
 			jsonDbTemplate.insert(charter);
 			String insertOk = "insert Charter: " + charter.toString();
 			LOG.info(insertOk);
 			return new ResponseDTO(200,insertOk);
-
 		}else {
 			jsonDbTemplate.upsert(charter);
 			String upsertOk = "upsert Charter: " + charter.toString();
 			LOG.info(upsertOk);
 			return new ResponseDTO(200,upsertOk);
-
 		}
-
 	}
 
 	public ResponseDTO removeCharter(String ids){

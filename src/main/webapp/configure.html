@@ -33,32 +33,33 @@
 				title="go to Tester"><img src="images/Tester.gif" alt="Tester" /></a>
 		</div>
 		<form>
-			<div id="NewCharter">
-				<h2>Charter</h2>
-				<fieldset>
-					<legend>Charter Information</legend>
-				<label for="inputNewCharter">Add Charter</label>
-				<textarea id="inputNewCharter"></textarea>
-				<input type="button" value="Add Charter" onClick="addNewCharter()">
-				</fieldset>					
+			<h2>Charter</h2>
+			<fieldset>
+				<legend>Add new TODO-Charter</legend>
+				<div id="NewCharter">
+					<label for="inputNewCharter">Add Charter</label>
+					<textarea id="inputNewCharter"></textarea>
+					<input type="button" value="Add Charter" onClick="addNewCharter()">
 				</div>
-				<fieldset>
-					<legend>Charter Overview</legend>
-					<div>
-						<table id="CharterTable">
-							<thead>
-								<tr>
-									<th></th>
-									<th>Chartername</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody id="CharterTableBody">
-							</tbody>
-						</table>
-				<input type="button" value="Remove Charter" onClick="removeCharter()">
 			</fieldset>
-			</div>
+			<fieldset>
+				<legend>TODO-Charter Overview</legend>
+				<div>
+					<table id="CharterTable">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Chartername</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody id="CharterTableBody">
+						</tbody>
+					</table>
+					<input type="button" value="Remove Charter"
+						onClick="removeCharter()">
+				</div>
+			</fieldset>
 		</form>
 		<form>
 			<div id="NewArea">
@@ -71,7 +72,7 @@
 		<form action="../rest/tester/add" method="POST">
 			<h2>Tester</h2>
 			<fieldset>
-				<legend>Tester information</legend>
+				<legend>Add new Tester</legend>
 				<div id="NewTester" class="row">
 					<div class="col-25">
 						<label for="inputFirstNameOfTester">Firstname:</label>

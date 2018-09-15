@@ -13,8 +13,7 @@
   <h1>Sessions</h1>
   <script>
   	window.addEventListener('load', loadTesterDropdown);
-    window.addEventListener('load', getCharters);
-    window.addEventListener('load', getSizeOfCharter)
+    window.addEventListener('load', loadCharterDropdown);
   </script>
 <script>
 $(function(){
@@ -30,13 +29,13 @@ $(function(){
     </div>
     <div id="Charter">
       <label id="CharterHeader" for="CharterDropdown">Please select one of Charter:</label>
-      <select id="CharterDropdown" size="1">
+      <select id="CharterDropdown" required>
         <option value="">None</option>
       </select>
     </div>
-    <div id="NewCharter">
-      <label for="inputNewCharter">OR Create a new Charter</label>
-      <input type="text" name="inputNewCharter" />
+    <div id="Areas">
+      <label for="inputAreas">Choose the Areas for that Testing Session</label>
+      <input type="text" name="inputAreas" />
     </div>
   </form>
 </body>

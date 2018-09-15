@@ -1,29 +1,36 @@
 var charterDropdown
 
-function getListOfCharters() {
- return ["Teste die Slotession im Playtech EGB",
-          "Teste den RealityCheck im EGB Playtech System",
-          "Teste den stdl. Warnmeldung im EGB Playtech System",
-          "Teste die Fehlermeldungen im EGB Playtech System"];
-}
-
-function getCharters() {
-  var charterArray = getListOfCharters();
-  charterDropdown = document.getElementById("CharterDropdown");
-  charterArray.forEach(createDropdownElement);
-}
-
-function createDropdownElement(value) {
-  console.log(value)
-  var option = document.createElement("option");
-  option.text = value;
-  charterDropdown.add(option);
-}
-
-function getSizeOfCharter(){
-  var charterArray = getListOfCharters();
-  document.getElementById("CharterHeader").innerHTML ="Please select one of "+ charterArray.length +" Charters:";
-}
+function loadCharterDropdown(){
+	  fetch('/rest/charter/all/TODO')
+	  .then(function(response) {
+	    if(response.ok){
+	      return response.json()
+	    }
+	    throw new Error('Network response was not ok.');
+	  })
+	  .then(function(myJson) {
+		  charterDropdown = document.getElementById("CharterDropdown");
+		  charterDropdown.options.length = 0;
+		    var fragment = document.createDocumentFragment();
+		    var opt = document.createElement('option');
+		    opt.innerHTML = "None"
+		    opt.value = ""
+		    fragment.appendChild(opt);
+		    for (entry in myJson) {
+		      var opt = document.createElement('option');
+		      console.log(myJson[entry]['chartername']);
+		      opt.innerHTML = myJson[entry]['chartername'];
+		      opt.value = myJson[entry]['id'];
+		      fragment.appendChild(opt);
+		    }
+		    charterDropdown.appendChild(fragment);
+		    var size = charterDropdown.length -1;
+		    document.getElementById("CharterHeader").innerHTML ="Please select one of "+ size +" Charters:";
+	  })
+	  .catch(function(error) {
+	  console.log('There has been a problem with your fetch operation: ', error.message);
+	  });
+	}
 
 function addNewCharter(){
 	var charterData = document.getElementById("inputNewCharter").value
@@ -37,15 +44,14 @@ function addNewCharter(){
 		.then(response => response.text())
 		.catch(error => console.error('Error:', error))
 		.then(function(response) {
-			console.log('Success:', response)
-			loadCharterWithStatusInTableRow('TODO')
+			console.log('Success:', response);
+			loadCharterWithStatusInTableRow('TODO');
 		});
 }
 
 function removeCharter(){
   var Ids = getIdsToRemoveCharter();
-  deleteData(Ids, 'rester/charter/remove');
-  deleteTableRow();
+  deleteCharterData(Ids, 'rest/charter/remove');
 }
 
 function getIdsToRemoveCharter(){
@@ -60,27 +66,19 @@ function getIdsToRemoveCharter(){
   return selected;
 }
 
-function deleteData(item, url) {
+function deleteCharterData(item, url) {
   return fetch(url + '/' + item, {
     method: 'delete'
   })
   .then(function(response) {
     return response.text();
-  }).then(function(text) {
+  })
+  .catch(error => console.error('Error:', error))
+  .then(function(text) {
   	console.log(text);
+  	loadCharterWithStatusInTableRow('TODO');
   });
 };
-
-function deleteTableRow(){
-  var allRows = document.getElementById('CharterTableBody').getElementsByTagName('tr');
-  var root = allRows[0].parentNode;
-  var allInp = root.getElementsByTagName('input');
-  for(var i=allInp.length-1;i>=0;i--){
-  	if((allInp[i].getAttribute('type')=='checkbox')&&(allInp[i].checked)){
-  		root.removeChild(allInp[i].parentNode.parentNode)
-  	}
-  }
-}
 
 function loadCharterWithStatusInTableRow(status){
 	  fetch('/rest/charter/all/'+status)

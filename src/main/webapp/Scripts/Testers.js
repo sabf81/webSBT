@@ -40,6 +40,7 @@ function loadTesterTableRow(){
   })
   .then(function(myJson) {
     var table = document.getElementById("TesterTabeleBody");
+    while (table.firstChild) table.removeChild(table.firstChild);
     for(i in myJson){
       var row = table.insertRow(0);
       var idCell = row.insertCell(0)
@@ -63,20 +64,7 @@ function loadTesterTableRow(){
 
 function removeTester(){
   var Ids = getIdsToRemoveTester();
-  deleteData(Ids,'rest/tester/remove')
-  deleteTableRow();
-
-}
-
-function deleteTableRow(){
-  var allRows = document.getElementById('TesterTabeleBody').getElementsByTagName('tr');
-  var root = allRows[0].parentNode;
-  var allInp = root.getElementsByTagName('input');
-  for(var i=allInp.length-1;i>=0;i--){
-  	if((allInp[i].getAttribute('type')=='checkbox')&&(allInp[i].checked)){
-  		root.removeChild(allInp[i].parentNode.parentNode)
-  	}
-  }
+  deleteTesterData(Ids,'rest/tester/remove')
 }
 
 function getIdsToRemoveTester(){
@@ -86,18 +74,20 @@ function getIdsToRemoveTester(){
       selected.push(this.id);
       console.log(this.id);
     }
-
   });
   return selected;
 }
 
-function deleteData(item, url) {
+function deleteTesterData(item, url) {
   return fetch(url + '/' + item, {
     method: 'delete'
   })
   .then(function(response) {
     return response.text();
-  }).then(function(text) {
+  })
+  .catch(error => console.error('Error:', error))
+  .then(function(text) {
   	console.log(text);
+  	loadTesterTableRow();
   });
 };
