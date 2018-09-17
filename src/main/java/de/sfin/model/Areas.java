@@ -11,8 +11,8 @@ public class Areas {
 	
 	@Id
 	private String id;
-	private String category;
-	private List<String> areas;
+	private String area;
+	private List<String> subAreas;
 	
 	
 	public Areas(){
@@ -25,22 +25,22 @@ public class Areas {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getCategory() {
-		return category;
+	public String getArea() {
+		return area;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setArea(String area) {
+		this.area = area;
 	}
-	public List<String> getAreas() {
-		return areas;
+	public List<String> getSubAreas() {
+		return subAreas;
 	}
-	public void setAreas(List<String> areas) {
-		this.areas = areas;
+	public void setSubAreas(List<String> subAreas) {
+		this.subAreas = subAreas;
 	}
 
 	@Override
 	public String toString() {
-		return "Areas [id=" + id + ", category=" + category + ", areas=" + areas + "]";
+		return "Areas [id=" + id + ", area=" + area + ", subAreas=" + subAreas + "]";
 	}
 	
 }

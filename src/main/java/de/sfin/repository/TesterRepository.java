@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.StringUtils;
+
 import de.sfin.connector.JsonDBConnector;
+import de.sfin.model.ResponseDTO;
 import de.sfin.model.Tester;
 import io.jsondb.JsonDBTemplate;
 
@@ -25,10 +28,15 @@ public class TesterRepository{
 	    return testers;
 	}
 	
-	public String addTester(String firstname, String lastname, String email) {
+	public ResponseDTO addTester(String firstname, String lastname, String email) {
+		String output = "";
+		if (StringUtils.isBlank(firstname)||StringUtils.isBlank(lastname)||StringUtils.isBlank(email)) {
+			LOG.warning("No Tester data found!");
+			return new ResponseDTO(500,"Please enter valid tester data");
+			//TODO: Throw Exception
+		}
 		JsonDBConnector jsondbConn = new JsonDBConnector();
 		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
-		String output = "";
 		Boolean collectionExists = jsonDbTemplate.collectionExists(Tester.class);
 		if (!collectionExists) {
 			jsonDbTemplate.createCollection(Tester.class);
@@ -51,7 +59,7 @@ public class TesterRepository{
 			LOG.info("upsert Tester: " + tester.toString());
 			output = "upsert Tester: " + tester.toString();
 		}
-		return output;
+		return new ResponseDTO(200,output);
 	}
 	
 	public String removeTester(String ids) {

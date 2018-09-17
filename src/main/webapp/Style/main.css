@@ -6,12 +6,16 @@ h1 {
   color: #003;
 }
 
+h2 {
+    margin: 2px auto 5px auto;
+    color: #000073;	
+}
+
 form {
   position:relative;
   max-width: auto;
   background: #FAFAFA;
-  padding: 30px;
-  /* margin-left: auto; */
+  padding: 10px;
   margin: 20px 10px 20px 90px;
   box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
   border-radius: 10px;
@@ -79,23 +83,28 @@ input, label, select {
   clear: both;
 }
 
-table th, tr {
-  border: 1px solid #dddddd;
-  background: #eddcdc;
-  padding: 5px;
+table th {
+  border: 1px solid #d8b1b1;
+  background: #d7b0b0;
 }
 
-table tbody th, tr {
-  border: 1px solid #003;
+table tr {
+  background: #ececec;
 }
 
-table tbody tr {
-  border: 1px solid #003;
+table, th, td {
+    border: 1px solid #d8b1b1;
+    border-collapse: collapse;
+}
+
+table tbody tr.display {
   background: #FAFAFA;
 }
+
 table tbody tr:hover {
-    background: #fce5eb;
+    background: #f4b3c1;
 }
+
 table tbody tr.alt:hover {
-    background: #fce5eb;
+    background: #f4b3c1;
 }

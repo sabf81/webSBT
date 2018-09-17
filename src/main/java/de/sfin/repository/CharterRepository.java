@@ -32,7 +32,7 @@ public class CharterRepository {
 
 	public ResponseDTO addNewCharter(String charterName) {
 		if (StringUtils.isBlank(charterName)) {
-			LOG.severe("No Charter title found!");
+			LOG.warning("No Charter title found!");
 			return new ResponseDTO(500,"Please enter a charter");
 			//TODO: Throw Exception
 		}

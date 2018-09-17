@@ -6,6 +6,7 @@
 <script src="Scripts/navigation.js"></script>
 <script src="Scripts/Testers.js"></script>
 <script src="Scripts/Charter.js"></script>
+<script src="Scripts/Areas.js"></script>
 <link rel="stylesheet" href="Style/main.css">
 <link rel="stylesheet" href="Style/sidenavigation.css">
 </head>
@@ -64,8 +65,24 @@
 		<form>
 			<div id="NewArea">
 				<h2>Area</h2>
-				<label for="inputNewArea">Add Area</label> <input type="text"
-					name="inputNewArea" /> <input type="button" value="Add Area">
+				<fieldset>
+					<legend>Add new Area</legend>
+					<div class="row">
+						<div class="col-25">
+							<label for="inputArea">Area:</label>
+						</div>
+						<div class="col-75">
+							<input type="text" id="inputArea" name="inputArea" placeholder="Your Area... e.g. 'OS'" />
+						</div>
+						<div class="col-25">
+							<label for="inputSubArea">Subarea:</label>
+						</div>
+						<div class="col-75">
+							<textarea id="inputSubArea" name="inputSubArea" placeholder="Your SubArea... seperated by comma e.g. 'Win10, Win7'"></textarea>
+						</div>
+						<input type="button" value="Add Area" onClick="addNewAreas()">
+					</div>
+				</fieldset>
 				<input type="button" value="Remove Area">
 			</div>
 		</form>

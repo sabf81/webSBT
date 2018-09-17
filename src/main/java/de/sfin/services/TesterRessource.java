@@ -35,9 +35,9 @@ public class TesterRessource {
 	public Response addTester(@FormParam("inputFirstNameOfTester") String firstname,
 			@FormParam("inputLastNameOfTester") String lastname, @FormParam("inputTesterEmail") String email,
 			@Context HttpServletResponse servletResponse) throws IOException {
-		String output = testerRepo.addTester(firstname, lastname, email);
+		ResponseDTO output = testerRepo.addTester(firstname, lastname, email);
 		servletResponse.sendRedirect("/configure.html#NewTester");
-		return Response.status(200).entity(output).build();
+		return Response.status(output.getReturnCode()).entity(output.getMessageText()).build();
 	}
 
 
