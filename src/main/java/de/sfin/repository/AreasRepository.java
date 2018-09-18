@@ -1,6 +1,7 @@
 package de.sfin.repository;
 
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,18 +19,30 @@ public class AreasRepository {
 		JsonDBConnector jsondbConn = new JsonDBConnector();
 		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();		
 		List<Areas> areaList = jsonDbTemplate.findAll(Areas.class);
+		if(areaList.isEmpty()) {
+			LOG.warning("No Area found!");
+			return null;
+		}
 		return areaList;
+	}
+	
+	public List<String> getSubAreas(String id){
+		JsonDBConnector jsondbConn = new JsonDBConnector();
+		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
+ 
+		Areas area = jsonDbTemplate.findById(id, Areas.class);
+		return area.getSubAreas();
 	}
 	
 	public ResponseDTO addAreas(String area, List<String> subAreas) {
 		if (StringUtils.isBlank(area)) {
-			LOG.warning("No Category found!");
-			return new ResponseDTO(500,"Please enter a category");
+			LOG.warning("No Area found to add!");
+			return new ResponseDTO(500,"Please enter a Area");
 			//TODO: Throw Exception
 		}
 		if (subAreas.size()==0) {
-			LOG.warning("No Subcategory found!");
-			return new ResponseDTO(500,"Please enter a Subcategory");
+			LOG.warning("No SubArea found to add!");
+			return new ResponseDTO(500,"Please enter a SubArea");
 			//TODO: Throw Exception
 		}
 		JsonDBConnector jsondbConn = new JsonDBConnector();
@@ -55,6 +68,19 @@ public class AreasRepository {
 		}
 		
 		
+	}
+
+	public ResponseDTO updateArea(String id, List<String> subAreas) {
+		JsonDBConnector jsondbConn = new JsonDBConnector();
+		JsonDBTemplate jsonDbTemplate = jsondbConn.createJsonDBTemplate();
+		
+		Areas area = new Areas();
+		area.setId(id);
+		area.setSubAreas(subAreas);
+		jsonDbTemplate.save(area, Areas.class);
+		LOG.log(Level.INFO, "Area with id {0} was updated", id);
+		
+		return new ResponseDTO(200,"Area with id "+id+" was updated");
 	}
 
 }

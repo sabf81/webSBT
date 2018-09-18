@@ -43,7 +43,6 @@ button, input, select, textarea {
 }
 
 select {
-  width: 70%;
   padding: 8px 10px;
   border: 1px;
   border-radius: 4px;

@@ -18,31 +18,31 @@
 		});
 	</script>
 	<script>
-		window.addEventListener('load', loadTesterTableRow);
-		window.addEventListener('load', loadCharterWithStatusInTableRow('TODO'));
+		window.addEventListener('load', getAreas())
+		window.addEventListener('load', function() {
+    		$.when(loadCharterWithStatusInTableRow('TODO')).then(loadTesterTableRow());
+		})
 	</script>
 	<div id="content">
 		<h1>Configure</h1>
 		<p>Here you can configura all necassary data you need for the
 			Session Based Testing</p>
 		<div id="sidebar" class="sidebar">
-			<a href="#nav-placeholder" title="Top"><img
-				src="images/TopArrow.gif" alt="Top" /></a> <a href="#NewCharter"
-				title="go to Charter"><img src="images/Charter.gif"
-				alt="Charter" /></a> <a href="#NewArea" title="go to Areas"><img
-				src="images/Areas.gif" alt="Areas" /></a> <a href="#NewTester"
-				title="go to Tester"><img src="images/Tester.gif" alt="Tester" /></a>
+			<a href="#nav-placeholder" title="Top"><img src="images/TopArrow.gif" alt="Top" /></a>
+			<a href="#NewCharter" title="go to Charter"><img src="images/Charter.gif"alt="Charter" /></a> 
+			<a href="#NewArea" title="go to Areas"><img src="images/Areas.gif" alt="Areas" /></a> 
+			<a href="#NewTester" title="go to Tester"><img src="images/Tester.gif" alt="Tester" /></a>
 		</div>
 		<form>
+		<div id="NewCharter">
 			<h2>Charter</h2>
 			<fieldset>
 				<legend>Add new TODO-Charter</legend>
-				<div id="NewCharter">
 					<label for="inputNewCharter">Add Charter</label>
 					<textarea id="inputNewCharter"></textarea>
 					<input type="button" value="Add Charter" onClick="addNewCharter()">
-				</div>
 			</fieldset>
+		</div>
 			<fieldset>
 				<legend>TODO-Charter Overview</legend>
 				<div>
@@ -51,14 +51,12 @@
 							<tr>
 								<th></th>
 								<th>Chartername</th>
-								<th>Status</th>
 							</tr>
 						</thead>
 						<tbody id="CharterTableBody">
 						</tbody>
 					</table>
-					<input type="button" value="Remove Charter"
-						onClick="removeCharter()">
+					<input type="button" value="Remove Charter"	onClick="removeCharter()">
 				</div>
 			</fieldset>
 		</form>
@@ -72,25 +70,45 @@
 							<label for="inputArea">Area:</label>
 						</div>
 						<div class="col-75">
-							<input type="text" id="inputArea" name="inputArea" placeholder="Your Area... e.g. 'OS'" />
+							<input type="text" id="inputArea" name="inputArea" placeholder="Your Area..." />
 						</div>
 						<div class="col-25">
 							<label for="inputSubArea">Subarea:</label>
 						</div>
 						<div class="col-75">
-							<textarea id="inputSubArea" name="inputSubArea" placeholder="Your SubArea... seperated by comma e.g. 'Win10, Win7'"></textarea>
+							<input type="text" id="inputSubArea" name="inputSubArea" placeholder="Your SubArea..."></input>
 						</div>
 						<input type="button" value="Add Area" onClick="addNewAreas()">
 					</div>
 				</fieldset>
-				<input type="button" value="Remove Area">
+				<fieldset>
+					<legend>Edit Area</legend>
+					<div class="row">
+						<div class="col-25">
+							<label for="inputArea">Choose an Area:</label>
+						</div>
+						<div class="col-75">
+							<select id="AreaDropdown" onChange="loadSubareas()">
+        						<option value="">None</option>
+      						</select>
+						</div>
+						<div class="col-25">
+							<label for="inputSubAreaEdit">Subarea</label>
+						</div>
+						<div class="col-75">
+							<input type="text" id="inputSubAreaEdit" name="inputSubAreaEdit"></input>
+						</div>
+						<input type="button" value="Edit Area" onClick="updateArea()">
+						<input type="button" value="Remove Area" onClick="">
+					</div>
+				</fieldset>
 			</div>
 		</form>
 		<form action="../rest/tester/add" method="POST">
-			<h2>Tester</h2>
+			<h2 id="NewTester">Tester</h2>
 			<fieldset>
 				<legend>Add new Tester</legend>
-				<div id="NewTester" class="row">
+				<div class="row">
 					<div class="col-25">
 						<label for="inputFirstNameOfTester">Firstname:</label>
 					</div>

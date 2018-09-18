@@ -26,7 +26,7 @@ function loadTesterDropdown(){
     testerDropdown.appendChild(fragment);
   })
   .catch(function(error) {
-  console.log('There has been a problem with your fetch operation: ', error.message);
+  console.log('Testers.js: There has been a problem with your fetch operation: ', error.message);
   });
 }
 
@@ -58,7 +58,7 @@ function loadTesterTableRow(){
     }
   })
   .catch(function(error) {
-	  console.log('There has been a problem with your fetch operation: ', error.message);
+	  console.log('Testers.js: There has been a problem with your fetch operation: ', error.message);
   });
 }
 

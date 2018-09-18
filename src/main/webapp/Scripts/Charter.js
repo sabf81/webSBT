@@ -6,7 +6,7 @@ function loadCharterDropdown(){
 	    if(response.ok){
 	      return response.json()
 	    }
-	    throw new Error('Network response was not ok.');
+	    throw new Error('Network response was not ok.'+response.text);
 	  })
 	  .then(function(myJson) {
 		  charterDropdown = document.getElementById("CharterDropdown");
@@ -28,7 +28,7 @@ function loadCharterDropdown(){
 		    document.getElementById("CharterHeader").innerHTML ="Please select one of "+ size +" Charters:";
 	  })
 	  .catch(function(error) {
-	  console.log('There has been a problem with your fetch operation: ', error.message);
+	  console.log('Charter.js: There has been a problem with your fetch operation: ', error.message);
 	  });
 	}
 
@@ -59,7 +59,6 @@ function getIdsToRemoveCharter(){
   $("table td :checkbox").each(function() {
     if($(this).is(':checked')){
       selected.push(this.id);
-      console.log(this.id);
     }
 
   });
@@ -75,7 +74,6 @@ function deleteCharterData(item, url) {
   })
   .catch(error => console.error('Error:', error))
   .then(function(text) {
-  	console.log(text);
   	loadCharterWithStatusInTableRow('TODO');
   });
 };
@@ -95,17 +93,15 @@ function loadCharterWithStatusInTableRow(status){
 	      var row = table.insertRow(0);
 	      var idCell = row.insertCell(0)
 	      var charterName = row.insertCell(1);
-	      var charterStatus = row.insertCell(2);
 	      var chkbox = document.createElement('input');
 	      chkbox.type = "checkbox";
 	      chkbox.id = myJson[i]['id'] ;
 	      chkbox.name = myJson[i]['id'] ;
 	      idCell.appendChild(chkbox);
 	      charterName.innerHTML = myJson[i]['chartername'];
-	      charterStatus.innerHTML = myJson[i]['status'];
 	    }
 	  })
 	  .catch(function(error) {
-		  console.log('There has been a problem with your fetch operation: ', error.message);
+		  console.log('Charter.js: There has been a problem with your fetch operation: ', error.message);
 	  });
 	}
